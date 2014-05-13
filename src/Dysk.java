@@ -21,5 +21,7 @@ public class Dysk {
         obecny = proc.getLoc();
         return temp;
     }
-    
+    public int poz(){
+        return obecny;
+    }
 }
