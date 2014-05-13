@@ -9,16 +9,18 @@ import java.util.LinkedList;
 public class ProcesListGenerator {
     
     /**
-     * Tworzy listę o zadanej długości zawierającą procesy o losowej długości
-     * i losowym czasie wejścia
+     * Tworzy listę o zadanej długości zawierającą procesy ze wskazaniem na 
+     * losowy sektor i o losowym czasie wejścia
      * @param arrayLength
      * @return LinkedList
      */
     public LinkedList<Proces> randGenerate(int arrayLength, int last){
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
+        int loc;
         for(int i=0; i < arrayLength; i++){
-            list.add(new Proces( (int) (Math.random() * safeClock), last ));
+            loc  = (int) (Math.random()*last) + 1 ;
+            list.add(new Proces( (int) (Math.random() * safeClock), loc));
             if(list.size() > 1){
                 safeClock += Math.abs(list.getLast().getLoc() - list.get(list.size()-2).getLoc());
             }  else safeClock = list.getLast().getLoc();
@@ -28,44 +30,44 @@ public class ProcesListGenerator {
     }
     
    /**
-     * Tworzy listę o zadanej długości zawierającą procesy o malejącej 
-     * (hiperbolicznie) długości i losowym czasie wejścia
+     * Tworzy listę o zadanej długości zawierającą procesy ze wskazaniem na 
+     * sektor znajdujący się ZA obecnym i losowym czasie wejścia
      * @param arrayLength
      * @return LinkedList
      */
-    public LinkedList<Proces> hyperbolaGenerate(int arrayLength){
+    public LinkedList<Proces> inOrderGenerate(int arrayLength, int last){
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
-        int len;
+        int loc = 0;
         for(int num =0; num < arrayLength;){
-            len = (39 + 3*num)/++num;
-            list.add(new Proces((int)(Math.random() * safeClock), len));
+            loc += last/arrayLength;
+            list.add(new Proces((int)(Math.random() * safeClock), loc));
             if(list.size() > 1){
                 safeClock += list.getLast().getLoc() - list.get(list.size()-2).getLoc();
             }  else safeClock = list.getLast().getLoc();
         }
-        System.out.print("\nhyperbolaGenerate ");
+        System.out.print("\ninOrderGenerate ");
         return sort(list);
     }
     
     /**
-     * Tworzy listę o zadanej długości zawierającą procesy o rosnącej 
-     * wykładniczo długości i losowym czasie wejścia
+     * Tworzy listę o zadanej długości zawierającą procesy ze wskazaniem na 
+     * sektor znajdujący się PRZED obecnym (od końca) i losowym czasie wejścia
      * @param arrayLength
      * @return LinkedList
      */    
-    public LinkedList<Proces> sqrtGenerate(int arrayLength){
+    public LinkedList<Proces> revOrderGenerate(int arrayLength, int last){
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
-        int len;
+        int loc = arrayLength;
         for(int i=0; i < arrayLength;){
-            len = (int) Math.sqrt(++i);
-            list.add(new Proces((int)(Math.random() * safeClock), len + 1 ));
+            loc -= last/arrayLength;
+            list.add(new Proces((int)(Math.random() * safeClock), loc ));
             if(list.size() > 1){
                 safeClock += list.getLast().getLoc() - list.get(list.size()-2).getLoc();
             }  else safeClock = list.getLast().getLoc();
         }
-        System.out.print("\nsqrtGenerate ");
+        System.out.print("\nrevOrderGenerate ");
         return sort(list);
     }
     

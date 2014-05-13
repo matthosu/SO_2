@@ -1,7 +1,6 @@
 /**
- * Instancje tej klasy symulują prace procesora "przetwarzając" procesy poprzez
- * skrócenie ich długości. Posiadają one dwa pola : clock oraz cycle. Nowy 
- * proces może zostać wczytany jedynie na początku cylku procesora (faza fetch). 
+ * Instancje tej klasy symulują prace dysku przyznając do niego dostęp poprzez 
+ * przesunięcie "głowicy" do wskazanego sektora 
  * @author Piotrek
  */
 public class Dysk {
