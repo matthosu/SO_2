@@ -18,6 +18,8 @@ public class ProcesListGenerator {
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
         int loc;
+        for(int i = 0;i<10;i++)                                     //Dodanie 10 procesów "na start"
+            list.add(new Proces(0, (int)( Math.random()*last)+1));
         for(int i=0; i < arrayLength; i++){
             loc  = (int) (Math.random()*last) + 1 ;
             list.add(new Proces( (int) (Math.random() * safeClock), loc));
@@ -39,6 +41,8 @@ public class ProcesListGenerator {
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
         int loc = 0;
+        for(int i = 0;i<10;i++)                                     //Dodanie 10 procesów "na start"
+            list.add(new Proces(0, (int)( Math.random()*last)+1));
         for(int num =0; num < arrayLength;){
             loc += last/arrayLength;
             list.add(new Proces((int)(Math.random() * safeClock), loc));
@@ -60,6 +64,8 @@ public class ProcesListGenerator {
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
         int loc = arrayLength;
+        for(int i = 0;i<10;i++)                                     //Dodanie 10 procesów "na start"
+            list.add(new Proces(0, (int)( Math.random()*last)+1));
         for(int i=0; i < arrayLength;){
             loc -= last/arrayLength;
             list.add(new Proces((int)(Math.random() * safeClock), loc ));
