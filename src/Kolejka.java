@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 
 public abstract class Kolejka {
-    private LinkedList<Proces> kolejka;
+    LinkedList<Proces> kolejka;
     private int totalDistance;
     public Kolejka(){
         totalDistance = 0;
