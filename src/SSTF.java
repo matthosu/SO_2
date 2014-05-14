@@ -17,9 +17,9 @@ public class SSTF extends Kolejka {
             while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
             Proces temp;
             if((pozycjaGlowicy-kolejka.get(i).getLoc()) > (kolejka.get(i+1).getLoc() - pozycjaGlowicy)){
-                temp = kolejka.get(i+1);
+                temp = kolejka.remove(i+1);
             }else{
-                temp = kolejka.get(i);
+                temp = kolejka.remove(i);
             }
             return temp;
         }else{

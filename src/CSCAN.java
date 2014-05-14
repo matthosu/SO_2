@@ -22,7 +22,7 @@ public class CSCAN extends Kolejka {
                 increaseTotal(odebrany.przesunNaMax());
                 i = 0;
             }
-            temp = kolejka.get(i);
+            temp = kolejka.remove(i);
             return temp;
         }else{
             return null;

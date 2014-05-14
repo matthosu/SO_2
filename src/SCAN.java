@@ -23,7 +23,7 @@ public class SCAN extends Kolejka {
             }else{
                 i = kolejka.size();
                 while(i >0 && pozycjaGlowicy < kolejka.get(i--).getLoc());
-                temp = kolejka.get(i);
+                temp = kolejka.remove(i);
             }
             return temp;
         }else{
