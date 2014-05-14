@@ -7,16 +7,33 @@
  *
  * @author Mateusz
  */
-public class SSTF {
-    public class FCFS extends Kolejka {
-    public FCFS(){
+public class SSTF extends Kolejka {
+    public SSTF(){
         super();
+    }
+    public Proces get(int pozycjaGlowicy){
+        if(!kolejka.isEmpty()){
+            int i = 0;
+            while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
+            Proces temp;
+            if((pozycjaGlowicy-kolejka.get(i).getLoc()) > (kolejka.get(i+1).getLoc() - pozycjaGlowicy)){
+                temp = kolejka.get(i+1);
+            }else{
+                temp = kolejka.get(i);
+            }
+            return temp;
+        }else{
+            return null;
+        }
     }
     @Override
     public void add(Proces proc){
-        kolejka.add(proc);
+        int i = 0;
+        while(i < kolejka.size()&&proc.getLoc() > kolejka.get(i++).getLoc());
+        kolejka.add(i, proc);
+    }
+    public Proces get(){
+        throw new UnsupportedOperationException("IdiotProgramistException, uzyles nie tego geta");
     }
 }
-
     
-}
