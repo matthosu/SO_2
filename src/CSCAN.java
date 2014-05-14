@@ -9,8 +9,9 @@
  */
 public class CSCAN extends Kolejka {
     private Dysk odebrany;
-    public CSCAN(){
+    public CSCAN(Dysk odebr){
         super();
+        odebrany = odebr;
     }
     public Proces get(int pozycjaGlowicy){
         if(!kolejka.isEmpty()){
