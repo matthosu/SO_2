@@ -24,4 +24,9 @@ public class Dysk {
     public int poz(){
         return obecny;
     }
+    public int przesunNaMax(){
+        int temp = Math.abs(max - obecny);
+        obecny = max;
+        return temp;
+    }
 }
