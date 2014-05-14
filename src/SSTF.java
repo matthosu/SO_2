@@ -14,13 +14,14 @@ public class SSTF extends Kolejka {
     public Proces get(int pozycjaGlowicy){
         if(!kolejka.isEmpty()){
             int i = 0;
-            while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
             Proces temp;
-            if((pozycjaGlowicy-kolejka.get(i).getLoc()) > (kolejka.get(i+1).getLoc() - pozycjaGlowicy)){
-                temp = kolejka.remove(i+1);
-            }else{
-                temp = kolejka.remove(i);
-            }
+            while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
+            System.out.print(i+ " ");
+                if((pozycjaGlowicy-kolejka.get(i).getLoc()) > (kolejka.get(i+1).getLoc() - pozycjaGlowicy)){
+                    temp = kolejka.remove(i+1);
+                }else{
+                    temp = kolejka.remove(i);
+                }
             return temp;
         }else{
             return null;

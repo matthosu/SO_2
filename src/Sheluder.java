@@ -38,49 +38,54 @@ public class Sheluder {
         kolejkaSCAN = new SCAN();
     }
     public void setCzasowka(LinkedList<Proces> prezent){
-        czasowaLista1 = prezent;
-        czasowaLista2 = prezent;
-        czasowaLista3 = prezent;
-        czasowaLista4 = prezent;
+        czasowaLista1 = new LinkedList(prezent);
+        czasowaLista2 = new LinkedList(prezent);
+        czasowaLista3 = new LinkedList(prezent);
+        czasowaLista4 = new LinkedList(prezent);
     
     }
-    public boolean sendToProcesor(){     //
-        int licznik = 0;                // zmienna pomocnicza przy sprawdzaniu czy proces się wykonał
-        if(!kolejkaCSCAN.isEmpty()){
-            licznik = readerCSCAN.przetworz(kolejkaCSCAN.get());
-            
-            kolejkaCSCAN.increaseTotal(licznik);
-            while(czasowaLista1.getFirst().getTime() < kolejkaCSCAN.getTotal()){
+    public void dodanieDoList(){
+       while(!czasowaLista1.isEmpty() &&czasowaLista1.getFirst().getTime() <= kolejkaCSCAN.getTotal()){
                 kolejkaCSCAN.add(czasowaLista1.remove());
             }
+        while(!czasowaLista2.isEmpty() &&czasowaLista2.getFirst().getTime() <= kolejkaFCFS.getTotal()){
+                kolejkaFCFS.add(czasowaLista2.remove());
+            }
+        while(!czasowaLista3.isEmpty() &&czasowaLista3.getFirst().getTime() <= kolejkaSSTF.getTotal()){
+                kolejkaSSTF.add(czasowaLista3.remove());
+            }
+        while(!czasowaLista4.isEmpty() &&czasowaLista4.getFirst().getTime() <= kolejkaSCAN.getTotal()){
+                kolejkaSCAN.add(czasowaLista4.remove());
+            }
+    }
+    public boolean sendToDisk(){     //
+        dodanieDoList();
+        int licznik = 0;                // zmienna pomocnicza przy sprawdzaniu czy proces się wykonał
+        if(!kolejkaCSCAN.isEmpty()){
+            licznik = readerCSCAN.przetworz(kolejkaCSCAN.get(readerCSCAN.poz()));
+            
+            kolejkaCSCAN.increaseTotal(licznik);
+            
         }
         if(!kolejkaFCFS.isEmpty()){
-            
             licznik = readerFCFS.przetworz(kolejkaFCFS.get());
             
             kolejkaFCFS.increaseTotal(licznik);
-            while(czasowaLista2.getFirst().getTime() < kolejkaFCFS.getTotal()){
-                kolejkaFCFS.add(czasowaLista2.remove());
-            }
+            
         }
         if(!kolejkaSSTF.isEmpty()){
         
-            licznik = readerSSTF.przetworz(kolejkaSSTF.get());
+            licznik = readerSSTF.przetworz(kolejkaSSTF.get(readerCSCAN.poz()));
             
             kolejkaSSTF.increaseTotal(licznik);
-            while(czasowaLista3.getFirst().getTime() < kolejkaSSTF.getTotal()){
-                kolejkaSSTF.add(czasowaLista3.remove());
-            }
+            
             
         }
         if(!kolejkaSCAN.isEmpty()){
-        
-            licznik = readerSCAN.przetworz(kolejkaSCAN.get());
+            licznik = readerSCAN.przetworz(kolejkaSCAN.get(readerCSCAN.poz()));
             
             kolejkaSCAN.increaseTotal(licznik);
-            while(czasowaLista4.getFirst().getTime() < kolejkaSCAN.getTotal()){
-                kolejkaSCAN.add(czasowaLista4.remove());
-            }
+            
         }
         boolean anything = (!kolejkaCSCAN.kolejka.isEmpty() || !kolejkaFCFS.kolejka.isEmpty()|| !kolejkaSCAN.kolejka.isEmpty()|| !kolejkaSSTF.kolejka.isEmpty()); // zmienna pomocnicza pozwalająca sprawdzić
         return anything;                                                                                         //czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście

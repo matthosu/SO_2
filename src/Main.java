@@ -19,7 +19,7 @@ public class Main {
         Scanner sc = new Scanner(new FileReader("Test.txt"));
         
         while(sc.hasNextInt()){
-            try{
+
                 pomocniczaWielkDysk = sc.nextInt();
                 Sheluder shlud = new Sheluder(pomocniczaWielkDysk);
                 ProcesListGenerator plg = new ProcesListGenerator();
@@ -28,14 +28,16 @@ public class Main {
                     case 0:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.randGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        while(shlud.sendToProcesor() || procesy.size() > 0);
+                        shlud.setCzasowka(procesy);
+                        while(shlud.sendToDisk());
 
                         shlud.printTimes(pomocniczaIloscZczytan);
                         break;
                     case 1:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.immediateGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        while(shlud.sendToProcesor() || procesy.size() > 0);
+                        shlud.setCzasowka(procesy);
+                        while(shlud.sendToDisk());
 
                         shlud.printTimes(pomocniczaIloscZczytan);
                         break;
@@ -43,24 +45,22 @@ public class Main {
                         pomocniczaIloscZczytan = sc.nextInt();
                         System.out.print("jest tu");
                         procesy = plg.inOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
+                        shlud.setCzasowka(procesy);
                         System.out.print("przeszedł tędy");
-                        while(shlud.sendToProcesor() || procesy.size() > 0)
-                             System.out.print("czyżby się zaciął");
+                        while(shlud.sendToDisk());
 
                         shlud.printTimes(pomocniczaIloscZczytan);
                         break;
                     case 3:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.revOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        while(shlud.sendToProcesor() || procesy.size() > 0);
+                        shlud.setCzasowka(procesy);
+                        while(shlud.sendToDisk());
 
                         shlud.printTimes(pomocniczaIloscZczytan);
                         break;
                 } 
-            }catch (NoSuchElementException e){
-                System.out.println(" \nNieprawidłowa skłądnia piliku : Plik powinien byc postaci :\n"
-                       + "Długość_cyklu_procesora  Sposób_generowania_procesów  Ilość_procesów");
-            }
+            
         }
     }
 }

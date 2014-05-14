@@ -57,7 +57,7 @@ public class ProcesListGenerator {
         int loc = 0;
         for(int i = 0;i<10;i++)                                     //Dodanie 10 procesów "na start"
             list.add(new Proces(0, (int)( Math.random()*last)+1));
-        for(int num =0; num < arrayLength;){
+        for(int num =0; num < arrayLength;num++){
             loc += last/arrayLength;
             list.add(new Proces((int)(Math.random() * safeClock), loc));
             if(list.size() > 1){
@@ -80,7 +80,7 @@ public class ProcesListGenerator {
         int loc = arrayLength;
         for(int i = 0;i<10;i++)                                     //Dodanie 10 procesów "na start"
             list.add(new Proces(0, (int)( Math.random()*last)+1));
-        for(int i=0; i < arrayLength;){
+        for(int i=0; i < arrayLength; i++){
             loc -= last/arrayLength;
             list.add(new Proces((int)(Math.random() * safeClock), loc ));
             if(list.size() > 1){
