@@ -13,7 +13,7 @@ public class ProcesListGenerator {
      * losowy sektor i o losowym czasie wejścia
      * @param arrayLength
      * @return LinkedList
-     */
+     */    
     public LinkedList<Proces> randGenerate(int arrayLength, int last){
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
@@ -28,6 +28,20 @@ public class ProcesListGenerator {
             }  else safeClock = list.getLast().getLoc();
         }
         System.out.print("\nrandGenerate ");
+        return sort(list);
+    }
+    
+    /**
+     * Ustawia wszystkie czasy wejścia na 0, oraz losowe sektory pamięci.
+     * @param arrayLength
+     * @param last
+     * @return
+     */
+    public LinkedList<Proces> immediateGenerate(int arrayLength, int last){
+        LinkedList<Proces> list = new LinkedList();
+        for(int i = 0;i<arrayLength + 10;i++)                                     //Dodanie 10 procesów "na start"
+            list.add(new Proces(0, (int)( Math.random()*last)+1));
+        System.out.print("\nimmediateGenerate ");
         return sort(list);
     }
     
