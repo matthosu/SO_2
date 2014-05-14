@@ -15,15 +15,20 @@ public class SSTF extends Kolejka {
         if(!kolejka.isEmpty()){
             int i = 0;
             Proces temp;
-            while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
-            System.out.print(i+ " ");
+            while(i < kolejka.size() && pozycjaGlowicy > kolejka.get(i++).getLoc());
+            
+            if(i+1 >= kolejka.size()) {
+                temp = kolejka.removeLast();
+            } else{
                 if((pozycjaGlowicy-kolejka.get(i).getLoc()) > (kolejka.get(i+1).getLoc() - pozycjaGlowicy)){
                     temp = kolejka.remove(i+1);
                 }else{
                     temp = kolejka.remove(i);
                 }
+            }
             return temp;
         }else{
+            
             return null;
         }
     }

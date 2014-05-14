@@ -19,7 +19,8 @@ public class SCAN extends Kolejka {
             int i = 0;
             if(czyRosn){
                 while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
-                temp = kolejka.get(i);
+                if(i+1>=kolejka.size()) temp = kolejka.removeLast();
+                else temp = kolejka.get(i);
             }else{
                 i = kolejka.size();
                 while(i >0 && pozycjaGlowicy < kolejka.get(i--).getLoc());
