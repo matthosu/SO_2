@@ -43,10 +43,8 @@ public class Main {
                         break;
                     case 2:
                         pomocniczaIloscZczytan = sc.nextInt();
-                        System.out.print("jest tu");
                         procesy = plg.inOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
                         shlud.setCzasowka(procesy);
-                        System.out.print("przeszedł tędy");
                         while(shlud.sendToDisk());
 
                         shlud.printTimes(pomocniczaIloscZczytan);

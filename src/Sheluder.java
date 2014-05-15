@@ -35,7 +35,7 @@ public class Sheluder {
         kolejkaCSCAN = new CSCAN(readerCSCAN);
         kolejkaFCFS = new FCFS();
         kolejkaSSTF = new SSTF();
-        kolejkaSCAN = new SCAN();
+        kolejkaSCAN = new SCAN(readerSCAN);
     }
     public void setCzasowka(LinkedList<Proces> prezent){
         czasowaLista1 = new LinkedList(prezent);
@@ -74,16 +74,13 @@ public class Sheluder {
             
         }
         if(!kolejkaSSTF.isEmpty()){
-        
             licznik = readerSSTF.przetworz(kolejkaSSTF.get(readerCSCAN.poz()));
-            
             kolejkaSSTF.increaseTotal(licznik);
             
             
         }
         if(!kolejkaSCAN.isEmpty()){
             licznik = readerSCAN.przetworz(kolejkaSCAN.get(readerCSCAN.poz()));
-            
             kolejkaSCAN.increaseTotal(licznik);
             
         }

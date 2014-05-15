@@ -29,4 +29,9 @@ public class Dysk {
         obecny = max;
         return temp;
     }
+     public int przesunNaMin(){
+        int temp = Math.abs(obecny);
+        obecny = 0;
+        return temp;
+    }
 }

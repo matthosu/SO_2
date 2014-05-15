@@ -8,10 +8,12 @@
  * @author Mateusz
  */
 public class SCAN extends Kolejka {
+    private Dysk odebrany;
     private boolean czyRosn;
-    public SCAN(){
+    public SCAN(Dysk jakis){
         super();
         czyRosn = true;
+        odebrany = jakis;
     }
     public Proces get(int pozycjaGlowicy){
         if(!kolejka.isEmpty()){
@@ -19,12 +21,27 @@ public class SCAN extends Kolejka {
             int i = 0;
             if(czyRosn){
                 while(i < kolejka.size()&&pozycjaGlowicy > kolejka.get(i++).getLoc());
-                if(i+1>=kolejka.size()) temp = kolejka.removeLast();
-                else temp = kolejka.get(i);
+                if(i+1>=kolejka.size()){
+                    temp = kolejka.removeLast();
+                }else{ 
+                    temp = kolejka.remove(i);
+                }
+                if(i == kolejka.size()-1){
+                    increaseTotal(odebrany.przesunNaMax());
+                    czyRosn = false;
+                }
             }else{
-                i = kolejka.size();
+                i = kolejka.size()-1;
                 while(i >0 && pozycjaGlowicy < kolejka.get(i--).getLoc());
-                temp = kolejka.remove(i);
+                if(i-1>=0){
+                    temp = kolejka.removeLast();
+                }else{ 
+                    temp = kolejka.remove(i);
+                }
+                if(i == 0){
+                    increaseTotal(odebrany.przesunNaMin());
+                    czyRosn = true;
+                }
             }
             return temp;
         }else{
