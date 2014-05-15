@@ -28,6 +28,8 @@ public class Main {
                     case 0:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.randGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
+                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
+
                         shlud.setCzasowka(procesy);
                         while(shlud.sendToDisk());
 
@@ -36,6 +38,7 @@ public class Main {
                     case 1:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.immediateGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
+                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
                         shlud.setCzasowka(procesy);
                         while(shlud.sendToDisk());
 
@@ -44,6 +47,7 @@ public class Main {
                     case 2:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.inOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
+                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
                         shlud.setCzasowka(procesy);
                         while(shlud.sendToDisk());
 
@@ -52,6 +56,7 @@ public class Main {
                     case 3:
                         pomocniczaIloscZczytan = sc.nextInt();
                         procesy = plg.revOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
+                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
                         shlud.setCzasowka(procesy);
                         while(shlud.sendToDisk());
 
