@@ -18,9 +18,6 @@ public class RAM {
         return contains;
     }
     public boolean isFull(){
-        if(ram[ram.length-1] != null){
-            return true;
-        } else return false;
-        
+        return ram[ram.length-1] != null ? true : false;
     }
 }

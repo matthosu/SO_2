@@ -10,24 +10,26 @@ public class Proces {
     
     private Page[] pageList;
     private LinkedList<Page> pages; // Odwołania do kolejnych stron
+    private LinkedList<Page> used; 
     private int entryTime;
     
     /**
-     * Tworzy proces o (n) zadanej ilości stron + n/7 stron dla zakłócenia lokalności 
+     * Tworzy proces o zadanej ilości stron + n/7 stroy dla zakłócenia lokalności 
      * odwołań. Odwołania postaci [1,2,...,7, + n/7*(1,2,...7,) +  n/7 rand]
      */
     public Proces(int time, int ammount){
         entryTime = time;
         pageList = new Page[7];
         pages = new LinkedList();
+        used = new LinkedList();
         for(int i = 0; i <7; i++){
             pageList[i] = new Page(i);
             pages.add(pageList[i]);
         }
         int j = ammount/7;
-        for(int i = 1; i < j; i++){ 
+        for(int i = 0; i < j; i++){ 
             for(int k = 0; k <7; k++){
-                pages.add(pageList[k]);
+                pages.add(pageList[i]);
             }
         }
         // Dodanie n/7 stron dla zakłócenia lokalnosci odwaolan
@@ -37,13 +39,14 @@ public class Proces {
     }
     
     /**
-     * Tworzy proces o 10 stronach + 2 strony dla zakłócenia lokalności 
+     * Tworzy proces o zadanej ilości stron + 2 stroy dla zakłócenia lokalności 
      * odwołań. Odwołania postaci [1,2,...,5,1,2,...5, + 2 rand]
      */
      public Proces(int time){
         entryTime = time;
         pageList = new Page[5];
         pages = new LinkedList();
+        used = new LinkedList();
         for(int i = 0; i < 5; i++){
             pageList[i] = (new Page(i));
             pages.add(pageList[i]);
@@ -58,7 +61,37 @@ public class Proces {
     }
     
     public Page getPage(){
-        return pages.remove(0);
+        Page tmp = pages.remove(0);
+        used.add(0,tmp);
+        return tmp;
+    }
+    public int lastTimeUsed(Page p){
+        int tmp = Integer.MAX_VALUE;
+        for(int i = 0; i < used.size();i++){
+            if(used.get(i) == p){
+                tmp = i+1;
+                break;
+            }
+        }
+        return tmp;
+    }
+    public int timeToGo(Page p){
+        int time = -1;
+        for(int i = 0; i<pageList.length; i++){
+            if(pageList[i].equals(p)){
+                 time = i;
+            }
+        }
+        return time;
+    }
+    public boolean contains(Page p){
+        boolean contains = false;
+        for(Page tmp : pageList){
+            if(tmp.equals(p)){
+                contains = true;
+            }
+        }
+        return contains;
     }
     public int getTime(){
         return entryTime;

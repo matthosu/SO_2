@@ -9,8 +9,8 @@ import java.util.LinkedList;
 public class ProcesListGenerator {
     
     /**
-     * Tworzy listę o zadanej długości zawierającą procesy o 5 stronach i 
-     * 12 odwołaniach i o losowym czasie wejścia
+     * Tworzy listę o zadanej długości zawierającą procesy o 12 stronach oraz 
+     * losowym czasie wejścia
      * @param arrayLength
      * @return LinkedList
      */    
@@ -20,26 +20,26 @@ public class ProcesListGenerator {
         
         for(int i=0; i < arrayLength; i++){
             list.add(new Proces( (int) (Math.random() * safeClock)));
-            safeClock += 6;
+            safeClock += 1;
         }
         System.out.print("\n_12Generate ");
         return sort(list);
     }
     /**
-     * Tworzy listę o zadanej długości zawierającą procesy zawierajace 7 stron 
-     * i zadaną liczbę odwołań i o losowym czasie wejścia
+     * Tworzy listę o zadanej długości zawierającą procesy o zadanej ilości stron 
+     * oraz losowym czasie wejścia
      * @param arrayLength
      * @return LinkedList
-     */    
+     */   
     public LinkedList<Proces> pseudoRandGenerate(int arrayLength, int ammount){
         LinkedList<Proces> list = new LinkedList();
         int safeClock = 0;
         
         for(int i=0; i < arrayLength; i++){
             list.add(new Proces( (int) (Math.random() * safeClock), ammount) );
-            safeClock += 7;
+            safeClock += 1;
         }
-        System.out.print("\npseudoRandGenerate ");
+        System.out.print("\npseudoRrandGenerate ");
         return sort(list);
     }
     
