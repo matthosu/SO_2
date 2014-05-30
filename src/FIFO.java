@@ -7,8 +7,8 @@
  *
  * @author Mateusz
  */
-public class FCFS extends Kolejka {
-    public FCFS(){
+public class FIFO extends Kolejka {
+    public FIFO(){
         super();
     }
     

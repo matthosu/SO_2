@@ -11,14 +11,12 @@ public class Proces {
     private Page[] pageList;
     private LinkedList<Page> pages; // Odwołania do kolejnych stron
     private LinkedList<Page> used; 
-    private int entryTime;
     
     /**
      * Tworzy proces o zadanej ilości stron + n/7 stroy dla zakłócenia lokalności 
      * odwołań. Odwołania postaci [1,2,...,7, + n/7*(1,2,...7,) +  n/7 rand]
      */
-    public Proces(int time, int ammount){
-        entryTime = time;
+    public Proces(int ammount){
         pageList = new Page[7];
         pages = new LinkedList();
         used = new LinkedList();
@@ -42,8 +40,7 @@ public class Proces {
      * Tworzy proces o zadanej ilości stron + 2 stroy dla zakłócenia lokalności 
      * odwołań. Odwołania postaci [1,2,...,5,1,2,...5, + 2 rand]
      */
-     public Proces(int time){
-        entryTime = time;
+     public Proces(){
         pageList = new Page[5];
         pages = new LinkedList();
         used = new LinkedList();
@@ -92,9 +89,6 @@ public class Proces {
             }
         }
         return contains;
-    }
-    public int getTime(){
-        return entryTime;
     }
     
 }

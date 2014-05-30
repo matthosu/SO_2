@@ -13,10 +13,9 @@ import java.util.LinkedList;
 
 public abstract class Kolejka {
     LinkedList<Proces> kolejka;
-    private int totalDistance;
+    private int liczbaBledow;
     public Kolejka(){
-        totalDistance = 0;
-        kolejka = new LinkedList<Proces>();
+        liczbaBledow = 0;
     }
     public void add(Proces proc){};
     
@@ -29,11 +28,11 @@ public abstract class Kolejka {
     public boolean isEmpty(){
         return kolejka.isEmpty();
     }
-    public void increaseTotal(int dist){
-        totalDistance+= dist;
+    public void increaseError(){
+        liczbaBledow++;
     }
     public int getTotal(){
-        return totalDistance;
+        return liczbaBledow;
     }
     
 }

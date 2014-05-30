@@ -11,52 +11,32 @@ import java.util.LinkedList;
  * @author Mateusz
  */
 public class Sheluder {
-    LinkedList<Proces> czasowaLista1;
-    LinkedList<Proces> czasowaLista2;
-    LinkedList<Proces> czasowaLista3;
-    LinkedList<Proces> czasowaLista4;
-    RAM readerCSCAN;
-    RAM readerFCFS;
-    RAM readerSSTF;
-    RAM readerSCAN;
-    CSCAN kolejkaCSCAN;
-    FCFS kolejkaFCFS;
-    SCAN kolejkaSCAN;
-    SSTF kolejkaSSTF;
-    public Sheluder(int rozmiarDysku){
-        czasowaLista1 = new LinkedList<Proces>();
-        czasowaLista2 = new LinkedList<Proces>();
-        czasowaLista3 = new LinkedList<Proces>();
-        czasowaLista4 = new LinkedList<Proces>();
-        readerCSCAN = new RAM(rozmiarDysku);
-        readerFCFS = new RAM(rozmiarDysku);
-        readerSSTF = new RAM(rozmiarDysku);
-        readerSCAN = new RAM(rozmiarDysku);
-        kolejkaCSCAN = new CSCAN(readerCSCAN);
-        kolejkaFCFS = new FCFS();
-        kolejkaSSTF = new SSTF();
-        kolejkaSCAN = new SCAN(readerSCAN);
+    RAM ramOPT;
+    RAM ramFIFO;
+    RAM ramLRU;
+    RAM ramALRU;
+    RAM ramRand;
+    LinkedList<Proces> lista;
+    OPT kolejkaOPT;
+    FIFO kolejkaFIFO;
+    LRU kolejkaLRU;
+    ALRU kolejkaALRU;
+    Rand kolejkaRand;
+    public Sheluder(int rozmiarRAMu, LinkedList<Proces>prezent){
+        ramOPT = new RAM(rozmiarRAMu);
+        ramFIFO = new RAM(rozmiarRAMu);
+        ramLRU = new RAM(rozmiarRAMu);
+        ramALRU = new RAM(rozmiarRAMu);
+        ramRand = new RAM(rozmiarRAMu);
+        kolejkaOPT = new OPT();
+        kolejkaFIFO = new FIFO();
+        kolejkaLRU = new LRU();
+        kolejkaALRU = new ALRU();
+        kolejkaRand = new Rand();
+        lista = new LinkedList(prezent);
     }
-    public void setCzasowka(LinkedList<Proces> prezent){
-        czasowaLista1 = new LinkedList(prezent);
-        czasowaLista2 = new LinkedList(prezent);
-        czasowaLista3 = new LinkedList(prezent);
-        czasowaLista4 = new LinkedList(prezent);
-    
-    }
-    public void dodanieDoList(){
-       while(!czasowaLista1.isEmpty() &&czasowaLista1.getFirst().getTime() <= kolejkaCSCAN.getTotal()){
-                kolejkaCSCAN.add(czasowaLista1.remove());
-            }
-        while(!czasowaLista2.isEmpty() &&czasowaLista2.getFirst().getTime() <= kolejkaFCFS.getTotal()){
-                kolejkaFCFS.add(czasowaLista2.remove());
-            }
-        while(!czasowaLista3.isEmpty() &&czasowaLista3.getFirst().getTime() <= kolejkaSSTF.getTotal()){
-                kolejkaSSTF.add(czasowaLista3.remove());
-            }
-        while(!czasowaLista4.isEmpty() &&czasowaLista4.getFirst().getTime() <= kolejkaSCAN.getTotal()){
-                kolejkaSCAN.add(czasowaLista4.remove());
-            }
+    public void dodanieDoRAMu(){
+       
     }
     public boolean sendToDisk(){     //
         dodanieDoList();

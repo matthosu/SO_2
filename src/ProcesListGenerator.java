@@ -16,14 +16,12 @@ public class ProcesListGenerator {
      */    
     public LinkedList<Proces> _12Generate(int arrayLength){
         LinkedList<Proces> list = new LinkedList();
-        int safeClock = 0;
         
         for(int i=0; i < arrayLength; i++){
-            list.add(new Proces( (int) (Math.random() * safeClock)));
-            safeClock += 1;
+            list.add(new Proces());
         }
         System.out.print("\n_12Generate ");
-        return sort(list);
+        return list;
     }
     /**
      * Tworzy listę o zadanej długości zawierającą procesy o zadanej ilości stron 
@@ -33,34 +31,11 @@ public class ProcesListGenerator {
      */   
     public LinkedList<Proces> pseudoRandGenerate(int arrayLength, int ammount){
         LinkedList<Proces> list = new LinkedList();
-        int safeClock = 0;
         
         for(int i=0; i < arrayLength; i++){
-            list.add(new Proces( (int) (Math.random() * safeClock), ammount) );
-            safeClock += 1;
+            list.add(new Proces( ammount) );
         }
         System.out.print("\npseudoRrandGenerate ");
-        return sort(list);
-    }
-    
-    
-    /**
-     * Otrzymuje listę procesów, porządkuje ją według czasów wejścia procesu,
-     * zwraca posortowaną listę
-     * @param list
-     * @return LinkedList
-     */
-    private LinkedList<Proces> sort(LinkedList<Proces> list){
-        
-        LinkedList<Proces> tempList = new LinkedList();
-        tempList.add(list.remove(0));
-        int i;
-        for(Proces proc : list){
-            for(i = 0; i < tempList.size() && !(proc.getTime() < tempList.get(i).getTime()); i++);
-            tempList.add(i, proc);  
-        }
-        
-        System.out.println("dla " + tempList.size() + " procesów");
-        return tempList;
+        return list;
     }   
 }
