@@ -17,6 +17,20 @@ public class RAM {
         }
         return contains;
     }
+    public Page get(int i){
+        return ram[i];
+    }
+    public void set(int i, Page p){
+        ram[i] = p; 
+    }
+    public boolean add(Page p){
+        if( ! isFull() ){
+            int i = 0;
+            while(ram[i] != null) i++;
+            ram[i] = p;
+            return true;
+        } else return false;
+    }
     public boolean isFull(){
         return ram[ram.length-1] != null ? true : false;
     }
