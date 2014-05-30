@@ -34,4 +34,7 @@ public class RAM {
     public boolean isFull(){
         return ram[ram.length-1] != null ? true : false;
     }
+    public int getSize(){
+        return ram.length;
+    }
 }

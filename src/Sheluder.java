@@ -28,42 +28,33 @@ public class Sheluder {
         ramLRU = new RAM(rozmiarRAMu);
         ramALRU = new RAM(rozmiarRAMu);
         ramRand = new RAM(rozmiarRAMu);
-        kolejkaOPT = new OPT();
-        kolejkaFIFO = new FIFO();
-        kolejkaLRU = new LRU();
-        kolejkaALRU = new ALRU();
-        kolejkaRand = new Rand();
-        lista = new LinkedList(prezent);
+        kolejkaOPT = new OPT(ramOPT, lista);
+        kolejkaFIFO = new FIFO(ramFIFO, lista);
+        kolejkaLRU = new LRU(ramLRU, lista);
+        kolejkaALRU = new ALRU(ramALRU, lista);
+        kolejkaRand = new Rand(ramRand, lista);
+        lista = new LinkedList(prezent, lista);
     }
-    public void dodanieDoRAMu(){
-       
+    public void dodanieDoRAMu(Page page){
+        if(!ramOPT.add(page)){
+            kolejkaOPT.errorHandle(page);
+        }
+        if(!ramFIFO.add(page)){
+            kolejkaFIFO.errorHandle(page);
+        }
+        if(!ramLRU.add(page)){
+            kolejkaLRU.errorHandle(page);
+        }
+        if(!ramALRU.add(page)){
+            kolejkaALRU.errorHandle(page);
+        }
+        if(ramRand.add(page)){
+            kolejkaRand.errorHandle(page);
+        }
     }
     public boolean sendToDisk(){     //
-        dodanieDoList();
-        int licznik = 0;                // zmienna pomocnicza przy sprawdzaniu czy proces się wykonał
-        if(!kolejkaCSCAN.isEmpty()){
-            licznik = readerCSCAN.przetworz(kolejkaCSCAN.get(readerCSCAN.poz()));
-            
-            kolejkaCSCAN.increaseTotal(licznik);
-            
-        }
-        if(!kolejkaFCFS.isEmpty()){
-            licznik = readerFCFS.przetworz(kolejkaFCFS.get());
-            
-            kolejkaFCFS.increaseTotal(licznik);
-            
-        }
-        if(!kolejkaSSTF.isEmpty()){
-            licznik = readerSSTF.przetworz(kolejkaSSTF.get(readerCSCAN.poz()));
-            kolejkaSSTF.increaseTotal(licznik);
-            
-            
-        }
-        if(!kolejkaSCAN.isEmpty()){
-            licznik = readerSCAN.przetworz(kolejkaSCAN.get(readerCSCAN.poz()));
-            kolejkaSCAN.increaseTotal(licznik);
-            
-        }
+        dodanieDoRAMu();
+        
         boolean anything = (!kolejkaCSCAN.kolejka.isEmpty() || !kolejkaFCFS.kolejka.isEmpty()|| !kolejkaSCAN.kolejka.isEmpty()|| !kolejkaSSTF.kolejka.isEmpty()); // zmienna pomocnicza pozwalająca sprawdzić
         return anything;                                                                                         //czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście
     }

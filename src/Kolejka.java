@@ -12,22 +12,11 @@ import java.util.LinkedList;
  */
 
 public abstract class Kolejka {
-    LinkedList<Proces> kolejka;
     private int liczbaBledow;
     public Kolejka(){
         liczbaBledow = 0;
     }
-    public void add(Proces proc){};
-    
-    public Proces remove(){
-        return kolejka.remove();
-    }
-    public Proces get(){
-        return kolejka.getFirst();
-    }
-    public boolean isEmpty(){
-        return kolejka.isEmpty();
-    }
+    public void errorHandle(Page page){}
     public void increaseError(){
         liczbaBledow++;
     }
