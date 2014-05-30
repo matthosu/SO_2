@@ -28,6 +28,7 @@ public class RAM {
             int i = 0;
             while(ram[i] != null) i++;
             ram[i] = p;
+            p.
             return true;
         } else return false;
     }

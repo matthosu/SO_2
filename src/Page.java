@@ -15,4 +15,7 @@ public class Page {
         num = n;
         modB = 0;
     }
+    public void setModB(byte b){
+        modB = b;
+    }
 }
