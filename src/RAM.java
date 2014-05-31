@@ -11,7 +11,7 @@ public class RAM {
     public boolean contains(Page p){
         boolean contains = false;
         for(Page tmp : ram){
-            if(tmp.equals(p)){
+            if(tmp != null && tmp.equals(p)){
                 contains = true;
             }
         }

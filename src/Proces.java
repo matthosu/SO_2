@@ -63,6 +63,9 @@ public class Proces {
         tmp.setModB(1);
         return tmp;
     }
+    public Page lastPage(){
+        return used.get(0);
+    }
     public int lastTimeUsed(Page p){
         int tmp = Integer.MAX_VALUE;
         for(int i = 0; i < used.size();i++){

@@ -24,13 +24,13 @@ public class Main {
                 Scanner pom = new Scanner(linia);
                 wielkoscRamu = pom.nextInt();
                 liczbaProcesow = pom.nextInt();
-                Sheluder shlud = new Sheluder(wielkoscRamu);
+                Sheluder shlud;
                 ProcesListGenerator plg = new ProcesListGenerator();
                 LinkedList<Proces> procesy = new LinkedList<>();
                 switch(pom.nextInt()){
                     case 0:
                         procesy = plg._12Generate(liczbaProcesow);
-                        shlud.setList(procesy);
+                        shlud = new Sheluder(wielkoscRamu, procesy); 
                         System.out.println("Dla " + liczbaProcesow + " procesów");
                         shlud.execution();
                         shlud.printErrors();
@@ -38,7 +38,7 @@ public class Main {
                     case 1:
                         iloscStron = pom.nextInt();
                         procesy = plg.pseudoRandGenerate(liczbaProcesow, iloscStron);
-                        shlud.setList(procesy);
+                        shlud = new Sheluder(wielkoscRamu, procesy); 
                         System.out.println("Dla " + liczbaProcesow + " procesów");
                         shlud.execution();
                         shlud.printErrors();
