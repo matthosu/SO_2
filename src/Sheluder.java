@@ -68,6 +68,7 @@ public class Sheluder {
             //time =  (long) ((System.nanoTime() - time)*0.000000001);
             System.out.printf("Dodanie %d stron %.2f s, ",j,((System.nanoTime() - time)*0.000000001));
         }
+        System.out.println();
 //czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście
     }
     public void printErrors(){

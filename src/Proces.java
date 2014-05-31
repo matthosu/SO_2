@@ -21,7 +21,7 @@ public class Proces {
         pages = new LinkedList();
         used = new LinkedList();
         for(int i = 0; i <7; i++){
-            pageList[i] = new Page(i);
+            pageList[i] = new Page(i, this);
             pages.add(pageList[i]);
         }
         int j = ammount/7;
@@ -45,7 +45,7 @@ public class Proces {
         pages = new LinkedList();
         used = new LinkedList();
         for(int i = 0; i < 5; i++){
-            pageList[i] = (new Page(i));
+            pageList[i] = (new Page(i, this));
             pages.add(pageList[i]);
             
         }
