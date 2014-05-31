@@ -54,22 +54,15 @@ public class Sheluder {
         }
     }
     public void execution(){     //
-        long time;
-        int j = 0;
         while(!lista.isEmpty()){
-            time = System.nanoTime();
-            j++;
             for(int i = 0; i < lista.size(); i++){
                 dodanieDoRAMu(lista.get(i).getPage());
                 if(lista.get(i).isDone()){
                     lista.remove(i);
                 }
             }
-            //time =  (long) ((System.nanoTime() - time)*0.000000001);
-            System.out.printf("Dodanie %d stron %.2f s, ",j,((System.nanoTime() - time)*0.000000001));
         }
-        System.out.println();
-//czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście
+        //czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście
     }
     public void printErrors(){
         System.out.println("Ilość błędów dla LRU: "  +   kolejkaLRU.getTotal());

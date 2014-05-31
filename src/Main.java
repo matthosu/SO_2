@@ -31,7 +31,7 @@ public class Main {
                     case 0:
                         procesy = plg._12Generate(liczbaProcesow);
                         shlud = new Sheluder(wielkoscRamu, procesy); 
-                        System.out.println("Dla " + liczbaProcesow + " procesów");
+                        System.out.println("RAM o wielkości: " + wielkoscRamu + "  dla " + liczbaProcesow + " procesów, z których każdy ma 5 stron i 12 odwołań");
                         shlud.execution();
                         shlud.printErrors();
                         break;
@@ -39,7 +39,7 @@ public class Main {
                         iloscStron = pom.nextInt();
                         procesy = plg.pseudoRandGenerate(liczbaProcesow, iloscStron);
                         shlud = new Sheluder(wielkoscRamu, procesy); 
-                        System.out.println("Dla " + liczbaProcesow + " procesów");
+                        System.out.println("RAM o wielkości: " + wielkoscRamu + "  dla " + liczbaProcesow + " procesów, z których każdy ma 7 stron i " + (iloscStron/7)*8 + " odwołań" );
                         shlud.execution();
                         shlud.printErrors();
                         break;

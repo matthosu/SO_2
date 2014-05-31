@@ -63,9 +63,7 @@ public class Proces {
         tmp.setModB(1);
         return tmp;
     }
-    public Page lastPage(){
-        return used.get(0);
-    }
+
     public int lastTimeUsed(Page p){
         int tmp = Integer.MAX_VALUE;
         for(int i = 0; i < used.size();i++){
@@ -78,9 +76,10 @@ public class Proces {
     }
     public int timeToGo(Page p){
         int time = -1;
-        for(int i = 0; i<pageList.length; i++){
-            if(pageList[i].equals(p)){
+        for(int i = 0; i< pages.size(); i++){
+            if(pages.get(i).equals(p)){
                  time = i;
+                 break;
             }
         }
         return time;
