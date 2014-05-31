@@ -27,7 +27,7 @@ public class Main {
                 Sheluder shlud = new Sheluder(wielkoscRamu);
                 ProcesListGenerator plg = new ProcesListGenerator();
                 LinkedList<Proces> procesy = new LinkedList<>();
-                switch(sc.nextInt()){
+                switch(pom.nextInt()){
                     case 0:
                         procesy = plg._12Generate(liczbaProcesow);
                         shlud.setList(procesy);
@@ -36,7 +36,7 @@ public class Main {
                         shlud.printErrors();
                         break;
                     case 1:
-                        iloscStron = sc.nextInt();
+                        iloscStron = pom.nextInt();
                         procesy = plg.pseudoRandGenerate(liczbaProcesow, iloscStron);
                         shlud.setList(procesy);
                         System.out.println("Dla " + liczbaProcesow + " procesów");
