@@ -25,11 +25,9 @@ public class OPT extends Kolejka{
         int spr = 0;
         int pom = 0;
         for(int i = 0; i < memory.getSize(); i++){
-            for(int j = 0; j < lista.size(); j++){
-                if(lista.get(j).contains(memory.get(i))&& spr < lista.get(j).timeToGo(memory.get(i))){
-                    spr = lista.get(j).timeToGo(memory.get(i));
-                    pom = i;
-                }
+            if(memory.get(i).getProces().timeToGo(memory.get(i)) > spr){
+                spr = memory.get(i).getProces().timeToGo(memory.get(i));
+                pom = i;
             }
         }
         memory.set(pom, page);
