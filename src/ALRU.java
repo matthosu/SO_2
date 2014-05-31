@@ -10,10 +10,10 @@ import java.util.LinkedList;
  *
  * @author Mateusz
  */
-public class FIFO extends Kolejka {
+public class ALRU extends Kolejka{
     private RAM memory;
     int licznik;
-    public FIFO(RAM mem){
+    public ALRU(RAM mem){
         super();
         memory = mem;
         licznik = 0;
@@ -22,10 +22,20 @@ public class FIFO extends Kolejka {
     @Override
     public void errorHandle(Page page){
         super.increaseError();
+        while(memory.get(licznik).getModB() == 1){
+            memory.get(licznik).setModB(0);
+            licznik++;
+            if(licznik == memory.getSize()){
+                licznik = 0;
+            }
+        }
         memory.set(licznik++, page);
         if(licznik == memory.getSize()){
             licznik = 0;
         }
+        
+        memory.set(licznik, page);
     }
+    
     
 }

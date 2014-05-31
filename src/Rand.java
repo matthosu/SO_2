@@ -1,6 +1,3 @@
-
-import java.util.LinkedList;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,22 +7,18 @@ import java.util.LinkedList;
  *
  * @author Mateusz
  */
-public class FIFO extends Kolejka {
+public class Rand extends Kolejka {
     private RAM memory;
-    int licznik;
-    public FIFO(RAM mem){
+    public Rand(RAM mem){
         super();
         memory = mem;
-        licznik = 0;
     }
     
     @Override
     public void errorHandle(Page page){
         super.increaseError();
-        memory.set(licznik++, page);
-        if(licznik == memory.getSize()){
-            licznik = 0;
-        }
+        memory.set(((int)Math.random())*memory.getSize() , page);
+        
     }
     
 }

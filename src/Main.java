@@ -14,53 +14,34 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Main {
     public static void main(String[]args) throws FileNotFoundException{
-        int pomocniczaIloscZczytan;
-        int pomocniczaWielkDysk;
+        int iloscStron;
+        int wielkoscRamu;
+        int liczbaProcesow;
         Scanner sc = new Scanner(new FileReader("Test.txt"));
         
-        while(sc.hasNextInt()){
-
-                pomocniczaWielkDysk = sc.nextInt();
-                Sheluder shlud = new Sheluder(pomocniczaWielkDysk);
+        while(sc.hasNextLine()){
+                String linia = sc.nextLine();
+                Scanner pom = new Scanner(linia);
+                wielkoscRamu = pom.nextInt();
+                liczbaProcesow = pom.nextInt();
+                Sheluder shlud = new Sheluder(wielkoscRamu);
                 ProcesListGenerator plg = new ProcesListGenerator();
                 LinkedList<Proces> procesy = new LinkedList<>();
                 switch(sc.nextInt()){
                     case 0:
-                        pomocniczaIloscZczytan = sc.nextInt();
-                        procesy = plg.randGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
-
-                        shlud.setCzasowka(procesy);
-                        while(shlud.sendToDisk());
-
-                        shlud.printTimes(pomocniczaIloscZczytan);
+                        procesy = plg._12Generate(liczbaProcesow);
+                        shlud.setList(procesy);
+                        System.out.println("Dla " + liczbaProcesow + " procesów");
+                        shlud.execution();
+                        shlud.printErrors();
                         break;
                     case 1:
-                        pomocniczaIloscZczytan = sc.nextInt();
-                        procesy = plg.immediateGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
-                        shlud.setCzasowka(procesy);
-                        while(shlud.sendToDisk());
-
-                        shlud.printTimes(pomocniczaIloscZczytan);
-                        break;
-                    case 2:
-                        pomocniczaIloscZczytan = sc.nextInt();
-                        procesy = plg.inOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
-                        shlud.setCzasowka(procesy);
-                        while(shlud.sendToDisk());
-
-                        shlud.printTimes(pomocniczaIloscZczytan);
-                        break;
-                    case 3:
-                        pomocniczaIloscZczytan = sc.nextInt();
-                        procesy = plg.revOrderGenerate(pomocniczaIloscZczytan, pomocniczaWielkDysk);
-                        System.out.println("Dla dysku o wielkości: " + pomocniczaWielkDysk);
-                        shlud.setCzasowka(procesy);
-                        while(shlud.sendToDisk());
-
-                        shlud.printTimes(pomocniczaIloscZczytan);
+                        iloscStron = sc.nextInt();
+                        procesy = plg.pseudoRandGenerate(liczbaProcesow, iloscStron);
+                        shlud.setList(procesy);
+                        System.out.println("Dla " + liczbaProcesow + " procesów");
+                        shlud.execution();
+                        shlud.printErrors();
                         break;
                 } 
             

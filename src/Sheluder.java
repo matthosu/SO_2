@@ -22,48 +22,56 @@ public class Sheluder {
     LRU kolejkaLRU;
     ALRU kolejkaALRU;
     Rand kolejkaRand;
-    public Sheluder(int rozmiarRAMu, LinkedList<Proces>prezent){
+    public Sheluder(int rozmiarRAMu){
         ramOPT = new RAM(rozmiarRAMu);
         ramFIFO = new RAM(rozmiarRAMu);
         ramLRU = new RAM(rozmiarRAMu);
         ramALRU = new RAM(rozmiarRAMu);
         ramRand = new RAM(rozmiarRAMu);
         kolejkaOPT = new OPT(ramOPT, lista);
-        kolejkaFIFO = new FIFO(ramFIFO, lista);
+        kolejkaFIFO = new FIFO(ramFIFO);
         kolejkaLRU = new LRU(ramLRU, lista);
-        kolejkaALRU = new ALRU(ramALRU, lista);
-        kolejkaRand = new Rand(ramRand, lista);
-        lista = new LinkedList(prezent, lista);
+        kolejkaALRU = new ALRU(ramALRU);
+        kolejkaRand = new Rand(ramRand);
+
     }
+    public void setList(LinkedList<Proces> prezent){
+        lista = prezent;
+        }
     public void dodanieDoRAMu(Page page){
-        if(!ramOPT.add(page)){
+        if(!ramOPT.contains(page)&&!ramOPT.add(page)){
             kolejkaOPT.errorHandle(page);
         }
-        if(!ramFIFO.add(page)){
+        if(!ramFIFO.contains(page)&&!ramFIFO.add(page)){
             kolejkaFIFO.errorHandle(page);
         }
-        if(!ramLRU.add(page)){
+        if(!ramLRU.contains(page)&&!ramLRU.add(page)){
             kolejkaLRU.errorHandle(page);
         }
-        if(!ramALRU.add(page)){
+        if(!ramALRU.contains(page)&&!ramALRU.add(page)){
             kolejkaALRU.errorHandle(page);
         }
-        if(ramRand.add(page)){
+        if(!ramRand.contains(page)&&!ramRand.add(page)){
             kolejkaRand.errorHandle(page);
         }
     }
-    public boolean sendToDisk(){     //
-        dodanieDoRAMu();
-        
-        boolean anything = (!kolejkaCSCAN.kolejka.isEmpty() || !kolejkaFCFS.kolejka.isEmpty()|| !kolejkaSCAN.kolejka.isEmpty()|| !kolejkaSSTF.kolejka.isEmpty()); // zmienna pomocnicza pozwalająca sprawdzić
-        return anything;                                                                                         //czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście
+    public void execution(){     //
+        while(!lista.isEmpty()){
+            for(int i = 0; i < lista.size(); i++){
+                dodanieDoRAMu(lista.get(i).getPage());
+                if(lista.get(i).isDone()){
+                    lista.remove(i);
+                }
+            }
+        }                                                                         //czy zostały jeszcze jakiekolwiek procesy na którejkolwiek liście
     }
-    public void printTimes(int liczbaProcesow){
-        System.out.println("całkowita odległość pokonana przez głowicę dla CSCAN: "  +   kolejkaCSCAN.getTotal());
-        System.out.println("całkowita odległość pokonana przez głowicę dla FCFS: "  +   kolejkaFCFS.getTotal());
-        System.out.println("całkowita odległość pokonana przez głowicę dla SCAN: "  +   kolejkaSCAN.getTotal());
-        System.out.println("całkowita odległość pokonana przez głowicę dla SSTF: "  +   kolejkaSSTF.getTotal());
-    }
+    public void printErrors(){
+        System.out.println("Ilość błędów dla LRU: "  +   kolejkaLRU.getTotal());
+        System.out.println("Ilość błędów dla ALRU: "  +   kolejkaALRU.getTotal());
+        System.out.println("Ilość błędów dla FIFO: "  +   kolejkaFIFO.getTotal());
+        System.out.println("Ilość błędów dla OPT: "  +   kolejkaOPT.getTotal());
+        System.out.println("Ilość błędów dla losowego: "  +   kolejkaRand.getTotal());
+        }
     
 
 }

@@ -60,6 +60,7 @@ public class Proces {
     public Page getPage(){
         Page tmp = pages.remove(0);
         used.add(0,tmp);
+        tmp.setModB(1);
         return tmp;
     }
     public int lastTimeUsed(Page p){
@@ -89,6 +90,9 @@ public class Proces {
             }
         }
         return contains;
+    }
+    public boolean isDone(){
+        return pages.isEmpty();
     }
     
 }

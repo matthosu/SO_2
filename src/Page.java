@@ -8,14 +8,17 @@
  * @author Piotrek
  */
 public class Page {
-    private byte modB;
+    private int modB;
     private int num;
     
     public Page(int n){
         num = n;
         modB = 0;
     }
-    public void setModB(byte b){
+    public void setModB(int b){
         modB = b;
+    }
+    public int getModB(){
+        return modB;
     }
 }
