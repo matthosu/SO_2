@@ -33,8 +33,6 @@ public class ALRU extends Kolejka{
         if(licznik == memory.getSize()){
             licznik = 0;
         }
-        
-        memory.set(licznik, page);
     }
     
     
